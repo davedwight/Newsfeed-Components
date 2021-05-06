@@ -102,6 +102,56 @@ const data = [
 
     <span class="expandButton">+</span>
   </div>
+*/
+const articleContainer = document.querySelector('div.articles');
+
+function articleMaker(articleObject) {
+  let article = document.createElement('div');
+  let title = document.createElement('h2');
+  let date = document.createElement('p');
+  let paragraph1 = document.createElement('p');
+  let paragraph2 = document.createElement('p');
+  let paragraph3 = document.createElement('p');
+  let expand = document.createElement('span');
+
+  article.classList.add('article');
+  date.classList.add('date');
+  expand.classList.add('expandButton');
+
+  article.appendChild(title);
+  article.appendChild(date);
+  article.appendChild(paragraph1);
+  article.appendChild(paragraph2);
+  article.appendChild(paragraph3);
+  article.appendChild(expand);
+
+  title.textContent = articleObject.title;
+  date.textContent = articleObject.date;
+  paragraph1.textContent = articleObject.firstParagraph;
+  paragraph2.textContent = articleObject.secondParagraph;
+  paragraph3.textContent = articleObject.thirdParagraph;
+  expand.textContent = '+';
+
+  expand.addEventListener('click', (event => {
+    article.classList.toggle('article-open');
+  }))
+  
+  console.log(article);
+  return article;
+  
+}
+
+// console.log(articleMaker());
+// articleContainer.appendChild(article);
+
+const articlesArray = data.map(item => {
+  return articleMaker(item);
+});
+
+articlesArray.forEach(item => {
+  articleContainer.appendChild(item);
+})
+/*
 
   Step 2: Still inside `articleMaker`, add an event listener to the span.expandButton.
   This listener should toggle the class 'article-open' on div.article.
